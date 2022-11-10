@@ -3,6 +3,7 @@ import 'login_page.dart';
 import '../out_pass.dart';
 import '../mess_fee.dart';
 import '../status.dart';
+import 'view_menu.dart';
 
 class StudentHomePage extends StatefulWidget {
   final String userName;
@@ -20,22 +21,42 @@ class _StudentHomePageState extends State<StudentHomePage> {
       return OutPass(widget.userName);
     } else if (selectedIndex == 1) {
       return Status(widget.userName);
-    } else {
+    } else if (selectedIndex == 2) {
       return MessFee(widget.userName);
+    } else {
+      return ViewMenu();
     }
   }
 
   Map<int, String> pageName = {
     0: "Out Pass",
     1: "Approval Status",
-    2: "Mess Fee Payment"
+    2: "Mess Fee Payment",
+    3: "Mess Menu"
   };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
-        title: Text(pageName[selectedIndex] as String),
+        title: ListTile(
+          title: Text(
+            pageName[selectedIndex] as String,
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          trailing: IconButton(
+            icon: Icon(
+              Icons.person,
+              size: 30,
+              //color: Colors.grey,
+            ),
+            onPressed: () {},
+          ),
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -58,7 +79,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
               leading: Icon(
                 Icons.home,
               ),
-              title: const Text('Out Pass'),
+              title: const Text('Out pass'),
               onTap: () {
                 Navigator.of(context).pop();
                 setState(() {
@@ -68,7 +89,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
             ),
             ListTile(
               leading: Icon(Icons.request_page_outlined),
-              title: const Text('Request Status'),
+              title: const Text('Request status'),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -77,13 +98,27 @@ class _StudentHomePageState extends State<StudentHomePage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.restaurant),
-              title: const Text('Mess Fee'),
+              leading: Icon(Icons.money),
+              title: const Text('Pay mess fee'),
               onTap: () {
                 Navigator.pop(context);
-                setState(() {
-                  selectedIndex = 2;
-                });
+                setState(
+                  () {
+                    selectedIndex = 2;
+                  },
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.restaurant),
+              title: const Text('View today\'s menu'),
+              onTap: () {
+                Navigator.pop(context);
+                setState(
+                  () {
+                    selectedIndex = 3;
+                  },
+                );
               },
             ),
             ListTile(
@@ -97,7 +132,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                 );
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => LoginPage("student"),
+                    builder: (context) => LoginPage("Student"),
                   ),
                 );
               },

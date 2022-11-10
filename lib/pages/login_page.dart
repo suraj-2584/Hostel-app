@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
@@ -18,7 +19,7 @@ class LoginPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -60,7 +61,7 @@ class _LoginState extends State<Login> {
                 child: Text(
                   "${widget.userType} login",
                   style: const TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     fontSize: 30,
                   ),
                 ),
@@ -69,9 +70,10 @@ class _LoginState extends State<Login> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
                 child: const Text(
-                  'Sign in',
+                  'Have an account? Sign in then',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
